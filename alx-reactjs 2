@@ -1,0 +1,57 @@
+import { create } from 
+
+export const useRecipeStore = create((set) => ({
+  recipes: JSON.parse(localStorage.getItem('recipes') || '[]'),
+
+  addRecipe: (newRecipe) =>
+    set((state) => {
+      const recipes = [...state.recipes, newRecipe];
+      localStorage.setItem('recipes', JSON.stringify(recipes));
+      return { recipes };
+    }),
+
+  updateRecipe: (updatedRecipe) =>
+    set( => {
+      const recipes = state.recipes.map((r) =>
+        r.id === updatedRecipe.id ? { ...r, ...updatedRecipe } : r
+      );
+      localStorage.setItem('recipes', JSON.stringify(recipes));
+      return { recipes };
+    }),
+
+  deleteRecipe: (id) =>
+    set((state) => {
+      const recipes = state.recipes.filter((r) => r.id !== id);
+      localStorage.setItem('recipes', JSON.stringify(recipes));
+      return { recipes };
+    }),
+
+  setRecipes: (recipes) => {
+    localStorage.setItem('recipes', JSON.stringify(recipes));
+    set({ recipes })
+    import { useState } from 
+import { useRecipeStore } from
+import { useNavigate } from 
+
+const categories = ['Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Snack'];
+
+const AddRecipeForm = () => {
+  const addRecipe = useRecipeStore((s) => s.addRecipe);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!title.trim() || !description.trim()) return;
+
+    const id = Date.now().toString();
+    addRecipe({ id, title, description, category });
+    setTitle('');
+    setDescription('');
+    setCategory('');
+    navigate(`/recipes/${id}`);
+  };
+
+  return (

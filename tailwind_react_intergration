@@ -1,0 +1,54 @@
+<button class="bg-blue-600 text-white px-6 py-2 rounded-xl 
+               hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 active:scale-95 
+               transition duration-300 ease-in-out">
+  Pay Now
+</button><div class="bg-white p-6 shadow-md rounded-2xl transform transition duration-300 hover:scale-105 hover:shadow-xl">
+  <h3 class="text-lg font-semibold">Daily Earnings</h3>
+  <p class="text-2xl text-green-600 font-bold">KSh 8,500</p>
+</div><div class="bg-white p-6 shadow-md rounded-2xl transform transition duration-300 hover:scale-105 hover:shadow-xl">
+  <h3 class="text-lg font-semibold">Daily Earnings</h3>
+  <p class="textimport { useState } from "react";
+
+export default function DropdownMenu() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="relative">
+      <button 
+        onClick={=>
+setOpen(!open)} 
+        className="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition"
+      >
+        Menu
+      </button>
+      {open && (
+        <ul className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-2 
+                       transition-all duration-300 origin-top">
+          <li className="px-4 py-2 hover:bg-gray-100 rounded">Dashboard</li>
+          <li className="px-4 py-2 hover:bg-gray-100 rounded">Profile</li>
+          <li className="px-4 py-2 hover:bg-gray-100 rounded">Logout</li>
+        </ul>
+      )}
+    </div>
+  );
+}-2xl text-green-600 font-bold">KSh 8,500</p>
+<span class="absolute top-0 right-0 inline-flex h-3 w-3 bg-red-500 rounded-full animate-ping"></span>
+module.exports = {
+  theme: {
+    extend: {
+      keyframes: {
+        slideDown: {
+          "0%": { transform: "translateY(-20px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+      },
+      animation: {
+        slideDown: "slideDown 0.3s ease-out",
+      },
+    },
+  },
+    plugins: [],
+
+html
+Copy code
+<div class="animate-slideDown">Hello, World!</div>

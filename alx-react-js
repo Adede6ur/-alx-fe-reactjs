@@ -1,0 +1,5 @@
+ "id": "user123",
+  "username": "Diana",
+  "favorites": ["recipeA", "recipeC"]
+}ontext: Path: alx-react-js
+{

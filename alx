@@ -1,0 +1,48 @@
+import { create } from "zustand";
+
+const useRecipeStore = create((set, get) => ({
+  recipes: [], // All recipes
+  filteredRecipes: [], // Search results
+  filters: {
+    keyword: "",
+    category: "",
+    ingredients: [],
+    maxTime: null,
+    difficulty: ""
+  },
+
+  setRecipes: (recipes) => set({ recipes, filteredRecipes: recipes }),
+
+  setFilter: (key, value) =>
+    set((state) => {
+      const newFilters = { ...state.filters, [key]: value };
+      const filtered = state.recipes.filter((recipe) => {
+        const { keyword, category, ingredients, maxTime, difficulty } = newFilters;
+
+        const matchesKeyword =
+          !keyword || recipe.title.toLowerCase().includes(keyword.toLowerCase());
+
+        const matchesCategory = !category || recipe.category === category;
+
+        const matchesIngredients =
+          ingredients.length === 0 ||
+          ingredients.every((ing) => recipe.ingredients.includes(ing));
+
+        const matchesTime = !maxTime || recipe.prepTime <= maxTime;
+
+        const matchesDifficulty = !difficulty || recipe.difficulty === difficulty;
+
+        return (
+          matchesKeyword &&
+          matchesCategory &&
+          matchesIngredients &&
+          matchesTime &&
+          matchesDifficulty
+        );
+      });
+
+      return { filters: newFilters, filteredRecipes: filtered };
+    }),
+}));
+
+export default useRecipeStore;
